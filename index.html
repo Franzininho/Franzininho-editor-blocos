@@ -203,8 +203,8 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-12 sender" style="margin-top:1%;">
-				  <div class="lines-header"><span class="badge badge-info">Enviar</span></div>
-				  <div class="lines-body">
+				  <div><span class="badge badge-info">Enviar</span></div>
+				  <div>
 					<input id="command_line" class="command-line" placeholder="" size="85"style="width: 100%; border-style: solid; border-color: #E5E7E9;"/>					
 				  </div>
 				</div>
@@ -434,6 +434,7 @@
 			//await writer.write("REPL");
 			console.log("Iniciado o REPL!!!");
 			await writer.write(" \r\n");
+			await writer.write("\x03\r\n"); //CTRL+C para iniciar REPL do CircuitPython
 			
 			//writer.releaseLock();		
 			
@@ -456,7 +457,7 @@
 			  const valor = Number(value);
 			  if( valor != NaN ){
 				config_line.data.datasets[0].data.push(valor);
-				config_line.data.labels.push(config_line.data.datasets[0].data.lenght() + 1);
+				config_line.data.labels.push(config_line.data.datasets[0].data.length + 1);
 				window.myLine.update();
 			  }
 			  
@@ -546,6 +547,7 @@
 	
 	$("#enviar").click(async function() {
 	
+		await writer.write("\x03\r\n"); //CTRL+C para iniciar REPL do CircuitPython
 		const cmd = $("#command_line").val();
 		await writer.write(cmd + "\r\n");
 		console.log("Enviado: " + cmd);		
