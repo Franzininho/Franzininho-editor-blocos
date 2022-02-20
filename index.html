@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" integrity="sha384-7ynz3n3tAGNUYFZD3cWe5PDcE36xj85vyFkawcF6tIwxvIecqKvfwLiaFdizhPpN" crossorigin="anonymous">
   
+  <!-- Jquery and BootStrap -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -27,34 +28,9 @@
   <script src="./blockly/definicoes.js"></script>
   <script src="./blockly/geradores.js"></script>
   
-
-  <style>
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-    }
-    h1 {
-      font-weight: normal;
-      font-size: 140%;
-    }
-		
-	.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
-		color: #fff;
-		background-color: #28a745;
-	}
-	
-	a {
-		color: #28a745;
-	}
-	a:hover {
-		color: #28a745;
-	}
-	
-	.dropdown-item {
-		color: #28a745;
-	}
-
-  </style>
+  <!-- CSS -->	
+  <link rel="stylesheet" type="text/css" href="./css/index.css">
+  
 </head>
 <body>	
 
@@ -149,7 +125,7 @@
 
 		<!-- Tab panes -->
 		<div class="tab-content">
-		  <!-- EDITOR DE BLOCOS -->	
+		  <!-- Block edit -->	
 		  <div class="tab-pane container-fluid active" id="editor">
 			<div class="row">
 				<div class="col-sm-8" style="height: 400px">
@@ -162,7 +138,7 @@
 				</div>
 			</div>
 		  </div>
-		  <!-- EDITOR DE PYTHON -->	
+		  <!-- Python edit -->	
 		  <div class="tab-pane container-fluid" id="python">
 			<div class="row">
 				<div class="col-sm-12 receiver" style="margin-top:1%;">
@@ -220,7 +196,7 @@
 		  
 		  </div>
 		  
-		  <!-- Gráfico -->
+		  <!-- Graphic -->
 		  <div class="tab-pane container-fluid fade" id="grafico">
 		  
 			<div class="row">
@@ -249,370 +225,14 @@
 	<nav class="navbar fixed-bottom navbar-light bg-light">		
 		<a class="nav" href="https://franzininho.github.io/docs-franzininho-site/">Copyright © 2021 Franzininho.</a>
 	</nav>
-
-  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-    <category name="Logic" colour="%{BKY_LOGIC_HUE}">
-      <block type="controls_if"></block>
-      <block type="logic_compare"></block>
-      <block type="logic_operation"></block>
-      <block type="logic_negate"></block>
-      <block type="logic_boolean"></block>
-    </category>
-    <category name="Loops" colour="%{BKY_LOOPS_HUE}">
-      <block type="controls_repeat_ext">
-        <value name="TIMES">
-          <block type="math_number">
-            <field name="NUM">10</field>
-          </block>
-        </value>
-      </block>
-      <block type="controls_whileUntil"></block>
-    </category>
-    <category name="Math" colour="%{BKY_MATH_HUE}">
-      <block type="math_number">
-        <field name="NUM">123</field>
-      </block>
-      <block type="math_arithmetic"></block>
-      <block type="math_single"></block>
-    </category>
-    <category name="Text" colour="%{BKY_TEXTS_HUE}">
-      <block type="text"></block>
-      <block type="text_length"></block>
-      <block type="text_print"></block>
-    </category>
-	<sep></sep>
-	<category name="Franzininho" colour="135">
-      <block type="importarboard"></block>
-	  <block type="import_time"></block>
-      <block type="importardigitalio"></block>
-      <block type="importar_neopixel_write"></block>
-      <block type="importar_configurar_neopixel"></block>
-      <block type="acender_neopixel"></block>
-	  <block type="pausa"></block>
-	  <block type="rainbow_effect"></block>
-    </category>
-  </xml>
-    
-  <xml xmlns="https://developers.google.com/blockly/xml" id="startBlocks" style="display: none">
-	<block type="importarboard" inline="false" x="20" y="20">
-	<next><block type="importardigitalio" inline="true">
-	<next><block type="import_time">
-	<next><block type="importar_neopixel_write">
-	<next><block type="importar_configurar_neopixel">
-	<next><block type="controls_whileUntil">
-		<field name="MODE">WHILE</field>
-		<value name="BOOL">
-			<block type="logic_boolean"><field name="BOOL">TRUE</field></block>
-		</value>
-		<statement name="DO">
-			<block type="acender_neopixel"><field name="R">0</field><field name="G">0</field><field name="B">0</field>
-			<next><block type="pausa"><field name="P">1</field>
-			<next><block type="acender_neopixel"><field name="R">128</field><field name="G">128</field><field name="B">128</field>
-			<next><block type="pausa"><field name="P">1</field></block>
-			</next></block>
-			</next></block>
-			</next></block>
-		</statement>
-		</block></next>
-		</block></next>
-		</block></next>
-		</block></next>
-		</block></next>
-	</block>
-  </xml>
-
+	
+  <script src="./js/xml_toolbox.js"></script>
+  <script src="./js/xml_startBlocks.js"></script>
+  <script src="./js/graphic.js"></script>
+  <script src="./js/repl.js"></script>
+  <script src="./js/blockly.js"></script>
   <script>
-	//Grafico
-	
-	var config_line = {
-	  type: 'line',
-	  data: {
-		labels: [],
-		datasets: [{
-		  label: 'Gráfico',
-		  data: [],
-		  borderWidth: 1,
-		  borderColor: 'rgba(255,0,0,0.85)',
-		  backgroundColor: 'transparent',
-		}]
-	  },
-	  options: {
-		responsive: true,
-		title: {
-		  display: true,
-		  text: 'Valor'
-		},
-		tooltips: {
-		  mode: 'index',
-		  intersect: false,
-		},
-		hover: {
-		  mode: 'nearest',
-		  intersect: true
-		},
-		scales: {
-		  xAxes: [{
-			type: 'time',
-			ticks: {
-			  minRotation: 90,
-			  source: 'data'  
-			},
-			distribution: 'series',
-			display: true,
-			scaleLabel: {
-			  display: true,
-			  labelString: 'Sample'
-			}
-		  }],
-		  yAxes: [{
-			display: true,
-			scaleLabel: {
-			  display: true,
-			  labelString: 'Values'
-			}
-		  }]
-		}
-	  }
-	};
-
-	function createMyLine() {
-	  var ctx = document.getElementById('canvas').getContext('2d');
-	  window.myLine = new Chart(ctx, config_line);
-	};
-  
-	//Blockly
-	var mostrar = "nada aqui";
-  
-    var workspace = Blockly.inject('blocklyDiv',
-		{
-		  media: 'https://unpkg.com/blockly/media/',
-		  grid:{spacing: 20,length: 3,colour: '#ccc',snap: true},   
-		  zoom:{controls: true, wheel: true, startScale: 1.0, maxScale: 3, minScale: 0.3, scaleSpeed: 1.2, pinch: true},
-		  toolbox: document.getElementById('toolbox')
-		});
-    Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspace);
-	
-	function showCodePY() {
-      // Generate Python code and display it.
-      Blockly.Python.INFINITE_LOOP_TRAP = null;
-      var code = Blockly.Python.workspaceToCode(workspace);
-      alert(code);
-    }
-	
-	function update(event) {
-		Blockly.Python.INFINITE_LOOP_TRAP = null;
-		var code = new String(Blockly.Python.workspaceToCode(workspace));
-		if (code != "") {
-			mostrar = code;
-			document.getElementById("codigogerado").innerHTML = mostrar;
-			document.getElementById("codigogeradoeditor").innerHTML = mostrar;
-		}
-	}
-
-	workspace.addChangeListener(update);
-	
-	//SERIAL	
-	var port;		
-	var writer; 
-	var reader
-	var grafico = '';
-	const textEncoder = new TextEncoderStream();
-	const textDecoder = new TextDecoderStream();	
-	
-	$("#connectar").click(async function() {
-	
-		if ("serial" in navigator) {
-			port = await navigator.serial.requestPort();
-			await port.open({ baudRate: 115200 });				
-			$("#status").text("  CONECTADO!");				
-			console.log("Conectado a 115200 baunds");			
-			
-			//Escrita
-			const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
-			writer = textEncoder.writable.getWriter();
-			
-			//await writer.write("REPL");
-			console.log("Iniciado o REPL!!!");
-			await writer.write(" \r\n");
-			await writer.write("\x03\r\n"); //CTRL+C para iniciar REPL do CircuitPython
-			
-			//writer.releaseLock();		
-			
-			//Leitura
-			const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
-			reader = textDecoder.readable.getReader();
-
-			// Listen to data coming from the serial device.
-			while (true) {
-			  const { value, done } = await reader.read();
-			  if (done) {
-				// Allow the serial port to be closed later.
-				reader.releaseLock();
-				break;
-			  }
-			  // value is a string.
-			  const temp = $("#receiver_lines").val();
-			  $("#receiver_lines").text( temp + value);			  
-			  
-			  const valor = Number(value);
-			  if( valor != NaN ){
-				config_line.data.datasets[0].data.push(valor);
-				config_line.data.labels.push(config_line.data.datasets[0].data.length + 1);
-				window.myLine.update();
-			  }
-			  
-			  console.log("Recebido: " + value);
-			}
-			
-		}else{
-			console.log("Browser sem suporte a WebSerial!!!");
-		}
-		
-	});
-	
-	$("#connectarGrafico").click(async function() {
-	
-		if ("serial" in navigator) {
-			port = await navigator.serial.requestPort();
-			await port.open({ baudRate: 115200 });				
-			$("#status").text("  CONECTADO!");				
-			console.log("Conectado a 115200 baunds");			
-			
-			//Escrita
-			const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
-			writer = textEncoder.writable.getWriter();
-			
-			//await writer.write("REPL");
-			console.log("Iniciado o REPL!!!");
-			await writer.write(" \r\n");
-			
-			//writer.releaseLock();		
-			
-			//Leitura
-			const readableStreamClosed = port.readable.pipeTo(textDecoder.writable);
-			reader = textDecoder.readable.getReader();
-
-			// Listen to data coming from the serial device.
-			while (true) {
-			  const { value, done } = await reader.read();
-			  if (done) {
-				// Allow the serial port to be closed later.
-				reader.releaseLock();
-				break;
-			  }
-			  // value is a string.
-			  const temp = $("#receiver_lines").val();
-			  $("#receiver_lines").text( temp + value);			  
-			  
-			  grafico = grafico + value;
-			  
-			  if(value.indexOf('\n') !== -1){
-			  
-				  const valor = Number(grafico);
-				  
-				  if( valor != NaN ){
-					config_line.data.datasets[0].data.push(valor);
-					config_line.data.labels.push(config_line.data.datasets[0].data.length + 1);
-					window.myLine.update();
-					
-					console.log("Grafico atualizado!");
-				  }
-				  
-				  grafico = '';
-				  
-			  }
-			  
-			  console.log("Recebido: " + value);
-			}
-			
-		}else{
-			console.log("Browser sem suporte a WebSerial!!!");
-		}
-		
-	});
-	
-	$("#desconnectar").click(async function() {
-	
-		if (port != null) {				
-			await writer.releaseLock();				
-			await reader.releaseLock();
-			await port.close();
-			$("#status").text("");
-			console.log("Conexão encerrada");
-		}else{
-			console.log("Nenhum dispositivo conectado!");
-		}
-		
-	});
-	
-	$("#enviar").click(async function() {
-	
-		await writer.write("\x03\r\n"); //CTRL+C para iniciar REPL do CircuitPython
-		const cmd = $("#command_line").val();
-		await writer.write(cmd + "\r\n");
-		console.log("Enviado: " + cmd);		
-		
-	});
-	
-	$("#enviartudo").click(async function() {
-	
-		const cmd = Blockly.Python.workspaceToCode(workspace);
-		var comandos = cmd.split("\n");
-		
-		console.log('--- Enviando Script ---');
-		for (x in comandos) {	  
-		  if (comandos[x][0] == ' '){	
-			await writer.write(comandos[x] + "\n\r");
-		  }else{
-		    await writer.write("\n\r\n\r" + comandos[x] + "\n\r");
-		  }
-		  console.log(x + ' - ' + comandos[x] + '\n');	
-		}		
-		console.log('--- Envio Finalizado ---');		
-		
-	});
-	
-	$("#enviartudoGrafico").click(async function() {
-	
-		const cmd = Blockly.Python.workspaceToCode(workspace);
-		var comandos = cmd.split("\n");
-		
-		console.log('--- Enviando Script ---');
-		for (x in comandos) {	  
-		  if (comandos[x][0] == ' '){	
-			await writer.write(comandos[x] + "\n\r");
-		  }else{
-		    await writer.write("\n\r\n\r" + comandos[x] + "\n\r");
-		  }
-		  console.log(x + ' - ' + comandos[x] + '\n');	
-		}		
-		console.log('--- Envio Finalizado ---');		
-		
-	});
-	
-	$("#enter").click(async function() {
-	
-		await writer.write("\r\n\r\n");
-		console.log("Enviado: [ENTER][ENTER]");		
-		
-	});
-	
-	$("#clear").click( function() {
-	
-		$("#receiver_lines").text('>>>');
-		console.log("Console Limpo!");		
-		
-	});
-	
-	$("#salvarblocos").click( function(){
-	
-		var xml = Blockly.Xml.workspaceToDom(workspace);
-		var xml_text = Blockly.Xml.domToText(xml);
-	
-	});
-	
-	
-	
+	  			
 	window.onload = function() {
 	  createMyLine()
 	};
