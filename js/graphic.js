@@ -14,6 +14,7 @@
 	  },
 	  options: {
 		responsive: true,
+		maintainAspectRatio: false,
 		title: {
 		  display: true,
 		  text: 'Valor'
@@ -29,22 +30,34 @@
 		scales: {
 		  xAxes: [{
 			type: 'time',
+			time: {
+				unit: 'minute',
+				unitStepSize: 1,
+				displayFormats: {
+				   'minute': 'hh:mm:ss'
+				}
+			},
 			ticks: {
-			  minRotation: 90,
+			  minRotation: 60,
 			  source: 'data'  
 			},
 			distribution: 'series',
 			display: true,
 			scaleLabel: {
 			  display: true,
-			  labelString: 'Sample'
+			  labelString: 'Hora'
 			}
 		  }],
 		  yAxes: [{
 			display: true,
 			scaleLabel: {
-			  display: true,
-			  labelString: 'Values'
+			  display: true
+			},
+			ticks: {
+				beginAtZero: true,
+				steps: 10,
+				stepValue: 2,
+				max: 1200
 			}
 		  }]
 		}

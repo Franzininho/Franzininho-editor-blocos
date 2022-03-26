@@ -12,15 +12,15 @@
 			port = await navigator.serial.requestPort();
 			await port.open({ baudRate: 115200 });				
 			$("#status").text("  CONECTADO!");				
-			console.log("Conectado a 115200 baunds");			
+			console.log("Connection the 115200 baunds");			
 			
 			//Escrita
 			const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
 			writer = textEncoder.writable.getWriter();
 			
 			//await writer.write("REPL");
-			console.log("Iniciado o REPL!!!");
-			await writer.write(" \r\n");
+			console.log("Start REPL!!!");
+			//await writer.write(" \r\n");
 			await writer.write("\x03\r\n"); //CTRL+C para iniciar REPL do CircuitPython
 			
 			//writer.releaseLock();		
@@ -48,11 +48,11 @@
 				window.myLine.update();
 			  }
 			  
-			  console.log("Recebido: " + value);
+			  console.log("Receiver: " + value);
 			}
 			
 		}else{
-			console.log("Browser sem suporte a WebSerial!!!");
+			console.log("Browser not accept WebSerial!!!");
 		}
 		
 	});
@@ -63,15 +63,16 @@
 			port = await navigator.serial.requestPort();
 			await port.open({ baudRate: 115200 });				
 			$("#status").text("  CONECTADO!");				
-			console.log("Conectado a 115200 baunds");			
+			console.log("Connection the 115200 baunds");			
 			
 			//Escrita
 			const writableStreamClosed = textEncoder.readable.pipeTo(port.writable);
 			writer = textEncoder.writable.getWriter();
 			
 			//await writer.write("REPL");
-			console.log("Iniciado o REPL!!!");
-			await writer.write(" \r\n");
+			console.log("Start REPL!!!");
+			//await writer.write(" \r\n");
+			await writer.write("\x03\r\n"); //CTRL+C para iniciar REPL do CircuitPython
 			
 			//writer.releaseLock();		
 			
@@ -97,23 +98,27 @@
 			  
 				  const valor = Number(grafico);
 				  
-				  if( valor != NaN ){
+				  if( valor !== NaN ){
 					config_line.data.datasets[0].data.push(valor);
-					config_line.data.labels.push(config_line.data.datasets[0].data.length + 1);
+					config_line.data.labels.push(Date.now() );
 					window.myLine.update();
-					
-					console.log("Grafico atualizado!");
+										
+					if(config_line.data.datasets[0].data.length > 50){
+						config_line.data.datasets[0].data.shift();
+						config_line.data.labels.shift();
+				    }
+					console.log("Graphic Update! " + valor);
 				  }
 				  
 				  grafico = '';
 				  
 			  }
 			  
-			  console.log("Recebido: " + value);
+			  console.log("Receiver: " + value);
 			}
 			
 		}else{
-			console.log("Browser sem suporte a WebSerial!!!");
+			console.log("Browser not accept WebSerial!!!");
 		}
 		
 	});
@@ -125,37 +130,40 @@
 			await reader.releaseLock();
 			await port.close();
 			$("#status").text("");
-			console.log("Conexão encerrada");
+			console.log("Conection closed.");
 		}else{
-			console.log("Nenhum dispositivo conectado!");
+			console.log("Not found device!");
 		}
 		
 	});
 	
-	$("#enviar").click(async function() {
+	$("#send").click(async function() {
 	
-		await writer.write("\x03\r\n"); //CTRL+C para iniciar REPL do CircuitPython
+		await writer.write("\x03"); //CTRL+C para iniciar REPL do CircuitPython
 		const cmd = $("#command_line").val();
 		await writer.write(cmd + "\r\n");
-		console.log("Enviado: " + cmd);		
+		$("#command_line").val('');	
+		console.log("Send command: " + cmd);				
 		
 	});
 	
-	$("#enviartudo").click(async function() {
-	
+	$("#sendall").click(async function() {	
+		
 		const cmd = Blockly.Python.workspaceToCode(workspace);
 		var comandos = cmd.split("\n");
+		await writer.write("\x03\r\n"); //CTRL+C para iniciar REPL do CircuitPython
 		
-		console.log('--- Enviando Script ---');
+		console.log('--- Send Script ---');
 		for (x in comandos) {	  
 		  if (comandos[x][0] == ' '){	
 			await writer.write(comandos[x] + "\n\r");
 		  }else{
-		    await writer.write("\n\r\n\r" + comandos[x] + "\n\r");
+		    await writer.write(comandos[x] + "\n\r");
 		  }
 		  console.log(x + ' - ' + comandos[x] + '\n');	
-		}		
-		console.log('--- Envio Finalizado ---');		
+		}	
+		await writer.write("\n\r\n\r");	
+		console.log('--- Send finally ---');		
 		
 	});
 	
@@ -164,7 +172,7 @@
 		const cmd = Blockly.Python.workspaceToCode(workspace);
 		var comandos = cmd.split("\n");
 		
-		console.log('--- Enviando Script ---');
+		console.log('--- Send Script ---');
 		for (x in comandos) {	  
 		  if (comandos[x][0] == ' '){	
 			await writer.write(comandos[x] + "\n\r");
@@ -173,7 +181,7 @@
 		  }
 		  console.log(x + ' - ' + comandos[x] + '\n');	
 		}		
-		console.log('--- Envio Finalizado ---');		
+		console.log('--- Send finally ---');		
 		
 	});
 	
